@@ -1,0 +1,14 @@
+
+//https://getbootstrap.kr/docs/5.0/customize/sass/
+// 부트스트랩의 기본 셋팅값 변경 경로확인 ../../
+
+// Default variable overrides
+$primary: #FDC000;
+
+// Required 
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+
+//부트스트랩 css가져옴 
+@import "../../node_modules/bootstrap/scss/bootstrap.scss";

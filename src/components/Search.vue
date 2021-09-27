@@ -1,0 +1,89 @@
+<template>
+  <div class="container">
+    <input
+      v-model="title"
+      class="form-control" 
+      type="text"
+      placeholder="Search for Movies, Series & more" />
+    <!-- v-model="title" title에 사용자가 넣은 정보도 가져올수 있다 -->
+    <div class="selects">
+      <select
+        class="form-select"
+        v-for="filter in filters"
+        v-model="$data[filter.name]"
+        :key="filter.name">
+        <!-- v-model="$data[filter.name]" $data에 접근해 []안의 내용을 가져온다 -->
+        <option
+          v-if="filter.name === 'year'"
+          value="">
+          All Years
+        </option>
+        <option
+          v-for="item in filter.items"
+          :key="item">
+          {{ item }}
+        </option>
+      </select>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  data() {
+    return {
+      title: '',
+      type: 'movie',
+      number: 10,
+      year:'',
+      filters:[
+        {
+          name:'type',
+          items:['movie','series','episode']
+        },
+        {
+          name:'number',
+          items:[10,20,30]
+        },
+        {
+          name:'year',
+          items:(() => {
+            const years = []
+            const thisYear = new Date().getFullYear() //현재의 년도를 가져옴
+            for (let i = thisYear; i >=1985; i -=1) {
+              years.push(i)
+            }
+            // years 라는 배열데이터에 반복되는 값을 넣어준다
+            return years
+          })()
+        }
+        // (function(){return []})() 함수를만들고 즉시실행함
+
+      ]
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.container{
+  display: flex;
+  > * {
+    margin-right: 10px;
+    font-size: 15px;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+  .selects{
+    display: flex;
+    select{
+      width: 120px;
+      margin-right: 10px;
+      &:last-child{
+        margin-right: 0;
+        }
+    }
+  }
+}
+</style>
